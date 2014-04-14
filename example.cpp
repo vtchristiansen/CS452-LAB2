@@ -1,4 +1,4 @@
-#include "initShaders.h"
+#include "vtchristiansen_shaders.h"
 using namespace std;
 int counter=0;//counter to increase how many vertices are going to be drawn at a given time
 
@@ -26,13 +26,12 @@ GLfloat colorarray[]={1.0f,1.0f,0.0f,1.0f,//color array
 
 void init(){
 
-  ShaderInfo shaders[]={
-  { GL_VERTEX_SHADER , "vertexshader.glsl"} ,
-  { GL_FRAGMENT_SHADER , "fragmentshader.glsl"},
-  { GL_NONE , NULL} 
-  };
-
-  initShaders(shaders);
+  
+  GLuint fragshader=fragShader("fragmentshader.glsl");
+  GLuint vertshader=vertShader("vertexshader.glsl");
+  
+  GLuint program=createProgram(fragshader,vertshader);
+  glUseProgram(program);
   
   glGenVertexArrays(1, &vaoID);
   glBindVertexArray(vaoID);
